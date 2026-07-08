@@ -1,0 +1,15 @@
+services:
+  alma-xml-etl:
+    build: .
+    container_name: alma-xml-etl-pipeline
+    environment:
+      # path ภายใน container
+      INPUT_XML: /app/input/alma_response.xml
+      OUTPUT_CSV: /app/output/alma_output.csv
+    volumes:
+      # map volume เพื่อให้ไฟล์ input และ output อยู่ข้างนอก container
+      # ซ้าย = โฟลเดอร์บนเครื่องเรา
+      # ขวา = โฟลเดอร์ใน container
+      - ./input:/app/input
+      - ./output:/app/output
+    restart: "no"
